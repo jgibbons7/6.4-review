@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import routes from './routes'
+import {connect} from 'react-redux'
+import Header from './components/Header'
+import AuthHeader from './components/AuthHeader'
 
-function App() {
+function App(props) {
+  // console.log('LOOK ', props)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {props.isLoggedIn ? <Header/> : <AuthHeader/>}
+      {routes}
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = reduxState => reduxState
+
+export default connect(mapStateToProps)(App)
